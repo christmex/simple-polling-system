@@ -18,10 +18,12 @@ return new class extends Migration
             $table->date('jht_join_date')->nullable()->after('password');
             $table->date('bpjs_join_date')->nullable()->after('password');
             $table->date('join_date')->nullable()->after('password');
+            $table->date('finish_contract')->nullable()->after('password');
             $table->date('permanent_date')->nullable()->after('password');
             $table->string('citizenship_number')->nullable()->after('password');
             $table->date('born_date')->nullable()->after('password');
             $table->string('born_place')->nullable()->after('password');
+            
         });
     }
 
@@ -37,6 +39,7 @@ return new class extends Migration
             $table->dropColumn('jht_join_date');
             $table->dropColumn('bpjs_join_date');
             $table->dropColumn('join_date');
+            $table->dropColumn('finish_contract');
             $table->dropColumn('permanent_date');
             $table->dropColumn('citizenship_number');
             $table->dropColumn('born_date');

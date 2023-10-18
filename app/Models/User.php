@@ -25,6 +25,17 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'notes',
+        'read_employee_terms_date',
+        'kemnaker_join_date',
+        'jht_join_date',
+        'bpjs_join_date',
+        'join_date',
+        'finish_contract',
+        'permanent_date',
+        'citizenship_number',
+        'born_date',
+        'born_place',
     ];
 
     /**
@@ -47,7 +58,7 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    public $domain = '@sekolahbasic.sch.id';
+    public static $domain = '@sekolahbasic.sch.id';
 
     public function canAccessPanel(Panel $panel): bool
     {

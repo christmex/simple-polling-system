@@ -40,6 +40,7 @@ class UserResource extends Resource
                             TextInput::make('email')
                                 ->email()
                                 ->required()
+                                ->unique(ignoreRecord:true)
                                 ->maxLength(255),
                             TextInput::make('password')
                                 ->password()
@@ -52,21 +53,26 @@ class UserResource extends Resource
                                 ->preload()
                                 ->searchable(),
                     ]),
-                    Tabs\Tab::make('User Detail')
+                    Tabs\Tab::make('User Details')
                         ->schema([
+                            TextInput::make('citizenship_number')
+                                ->unique(ignoreRecord:true)
+                                ->maxLength(255),
                             TextInput::make('born_place'),
                             DatePicker::make('born_date'),
-                            TextInput::make('citizenship_number')
-                                ->maxLength(255),
-                            DatePicker::make('permanent_date'),
+                    ]),
+                    Tabs\Tab::make('Employee Details')
+                        ->schema([
                             DatePicker::make('join_date'),
+                            DatePicker::make('finish_contract'),
+                            DatePicker::make('permanent_date'),
                             DatePicker::make('bpjs_join_date'),
                             DatePicker::make('jht_join_date'),
                             DatePicker::make('kemnaker_join_date'),
                             DatePicker::make('read_employee_terms_date'),
                             Textarea::make('notes')
                                 ->columnSpanFull(),
-                    ]),
+                        ]),
                 ])
                 ->columnSpanFull()
                 ->columns([
@@ -92,35 +98,40 @@ class UserResource extends Resource
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('born_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('born_date')
+                ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('citizenship_number')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('permanent_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('permanent_date')
+                    ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('join_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('join_date')
+                    ->type('date')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('bpjs_join_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('finish_contract')
+                    ->type('date')
+                    ->sortable(),
+                Tables\Columns\TextInputColumn::make('bpjs_join_date')
+                    ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('jht_join_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('jht_join_date')
+                    ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('kemnaker_join_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('kemnaker_join_date')
+                    ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('read_employee_terms_date')
-                    ->date()
+                Tables\Columns\TextInputColumn::make('read_employee_terms_date')
+                    ->type('date')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('notes')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
