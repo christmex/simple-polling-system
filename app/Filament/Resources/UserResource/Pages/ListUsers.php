@@ -45,4 +45,11 @@ class ListUsers extends ListRecords
                 })
         ];
     }
+
+    protected function getHeaderWidgets() :array
+    {
+        return [
+            UserResource\Widgets\UserOverview::class,
+        ];
+    }
 }

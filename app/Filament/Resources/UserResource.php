@@ -16,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TernaryFilter;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
@@ -133,6 +134,7 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('notes')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -145,8 +147,29 @@ class UserResource extends Resource
             ])
             ->filters([
                 DateRangeFilter::make('finish_contract')
-                ->withIndicator(),
+                    ->ranges([
+                        __('filament-daterangepicker-filter::message.today') => [now(), now()],
+                        __('filament-daterangepicker-filter::message.yesterday') => [now()->subDay(), now()->subDay()],
+                        __('filament-daterangepicker-filter::message.last_7_days') => [now()->subDays(6), now()],
+                        __('filament-daterangepicker-filter::message.last_30_days') => [now()->subDays(29), now()],
+                        __('filament-daterangepicker-filter::message.this_month') => [now()->startOfMonth(), now()->endOfMonth()],
+                        'Next Month' => [now()->startOfMonth()->addMonth(), now()->endOfMonth()->addMonth()],
+                        __('filament-daterangepicker-filter::message.last_month') => [now()->subMonth()->startOfMonth(), now()->subMonth()->endOfMonth()],
+                        __('filament-daterangepicker-filter::message.this_year') => [now()->startOfYear(), now()->endOfYear()],
+                        __('filament-daterangepicker-filter::message.last_year') => [now()->subYear()->startOfYear(), now()->subYear()->endOfYear()],
+                    ])
+                    ->withIndicator(),
                 Tables\Filters\TrashedFilter::make(),
+                
+                TernaryFilter::make('employee_status')
+                ->placeholder('All')
+                ->trueLabel('Only Permanent')
+                ->falseLabel('Only Cotract')
+                ->queries(
+                    true: fn (Builder $query) => $query->where('finish_contract',NULL),
+                    false: fn (Builder $query) => $query->where('finish_contract','!=',NULL),
+                    blank: fn (Builder $query) => $query,
+                )
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -186,5 +209,12 @@ class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            UserResource\Widgets\UserOverview::class,
+        ];
     }
 }
