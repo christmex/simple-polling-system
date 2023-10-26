@@ -41,9 +41,10 @@ class CandidateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
                 Tables\Columns\ImageColumn::make('picture')
+                    ->size(100)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('votes')
                     ->numeric()
