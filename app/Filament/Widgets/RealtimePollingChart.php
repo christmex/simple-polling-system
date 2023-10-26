@@ -21,7 +21,7 @@ class RealtimePollingChart extends ChartWidget
             'datasets' => [
                 [
                     // 'label' => 'Realtime Polling System - Pemilihan Ketua OSIS SMP BASIC BATAM CENTER',
-                    'label' => 'Kandidat Ketua OSIS',
+                    'label' => 'Total Suara',
                     'data' => Candidate::getAllCandidateVotes(),
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
