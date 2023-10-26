@@ -7,7 +7,7 @@ use Filament\Widgets\ChartWidget;
 
 class RealtimePollingChart extends ChartWidget
 {
-    protected static ?string $heading = 'Realtime Statistik Suara Kandidat';
+    protected static ?string $heading = 'Pemilihan Ketua OSIS SMP BASIC BATAM CENTER';
 
     protected int | string | array $columnSpan = 'full';
 
