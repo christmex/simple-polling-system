@@ -18,6 +18,7 @@ class ManageCandidates extends ManageRecords
             Actions\CreateAction::make(),
             Actions\Action::make('Reset Voters')
                 ->color('danger')
+                ->requiresConfirmation()
                 ->action(function(){
                     Candidate::where('id','>',0)->update(['votes' => 0]);
                     Notification::make()
