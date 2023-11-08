@@ -7,7 +7,7 @@ use Filament\Widgets\ChartWidget;
 
 class RealtimePollingChart extends ChartWidget
 {
-    protected static ?string $heading = 'Pemilihan Ketua OSIS SMP BASIC BATAM CENTER';
+    protected static ?string $heading = 'Pemilihan Ketua OSIS BASIC BATAM CENTER';
 
     protected int | string | array $columnSpan = 'full';
 
@@ -20,7 +20,7 @@ class RealtimePollingChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    // 'label' => 'Realtime Polling System - Pemilihan Ketua OSIS SMP BASIC BATAM CENTER',
+                    // 'label' => 'Realtime Polling System - Pemilihan Ketua OSIS BASIC BATAM CENTER',
                     'label' => 'Total Suara',
                     'data' => Candidate::getAllCandidateVotes(),
                     'backgroundColor' => '#36A2EB',
