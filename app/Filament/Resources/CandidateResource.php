@@ -68,10 +68,10 @@ class CandidateResource extends Resource
                 ->action(function(Model $record){
                     $record->votes ++;
                     $record->save();
-                    Notification::make()
-                        ->success()
-                        ->title('Voted '.$record->name)
-                        ->send();
+                    // Notification::make()
+                    //     ->success()
+                    //     ->title('Voted '.$record->name)
+                    //     ->send();
                 }),
                 Tables\Actions\Action::make('unvote')
                 ->color('danger')
@@ -79,10 +79,10 @@ class CandidateResource extends Resource
                 ->action(function(Model $record){
                     $record->votes --;
                     $record->save();
-                    Notification::make()
-                        ->success()
-                        ->title('UnVoted '.$record->name)
-                        ->send();
+                    // Notification::make()
+                    //     ->success()
+                    //     ->title('UnVoted '.$record->name)
+                    //     ->send();
                 }),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
