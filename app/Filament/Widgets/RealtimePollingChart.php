@@ -13,7 +13,7 @@ class RealtimePollingChart extends ChartWidget
 
     protected static ?string $pollingInterval = '1s';
 
-    protected static ?string $maxHeight = '400px';
+    protected static ?string $maxHeight = '300px';
 
     protected function getData(): array
     {
