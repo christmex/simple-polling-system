@@ -77,12 +77,14 @@ class CandidateResource extends Resource
                 ->color('danger')
                 ->button()
                 ->action(function(Model $record){
+                    if($record->votes > 0){
                     $record->votes --;
                     $record->save();
                     // Notification::make()
                     //     ->success()
                     //     ->title('UnVoted '.$record->name)
                     //     ->send();
+                    }
                 }),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
